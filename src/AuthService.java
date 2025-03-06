@@ -4,6 +4,11 @@ import java.util.Map;
 public class AuthService {
     private Map<String, User> users = new HashMap<>();
     private User user;
+    private DataManagement dataManagement = new DataManagement();
+
+    AuthService(){
+        users = dataManagement.loadUser();
+    }
 
     public void register(String username, String password) {
         if (users.containsKey(username)) {
@@ -25,12 +30,8 @@ public class AuthService {
         }
     }
 
-    public void changePassword(String oldPassword, String newPassword){
-        if(oldPassword.equals(user.getPassword())){
-            System.err.println("hi");
-        }
-        else{
-            System.out.println("Incorrect password old password");
-        }
+    public void changePassword(String newPassword){
+       user.setPassword(newPassword);
     }
+
 }
